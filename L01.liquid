@@ -1,0 +1,50 @@
+ {% comment %}
+    //add the id to the achnor tag if you are keeping the origial my orders page and create a second anchor
+    //id="ordernavbtn"
+    //id="searchnavbtn"
+    //duplicate the my orders page and rename it to some name or just replace the entries (I wanted both)
+    {% endcomment %}
+    
+    {% comment %}
+    //add the following below your 'flits-page-heading' div 
+    {% endcomment %}
+    
+    <input id="searchOrder" class="flits-search" placeholder="Type an Order Number here...">
+    
+    {% comment %}
+    //somwhere on the page add this:               
+    {% endcomment %}              
+    <script> 
+	 $(document).ready(function(){
+             $("#searchOrder").keyup(function(){
+                $(".flits-order-row").fadeOut();  
+                var valueInput = $("#searchOrder").val();  
+                var valueSearch = "#\\#"+valueInput ; //required due to how shopify grabs the ordername
+
+                $(valueSearch).fadeIn();
+             });
+	  })
+	  
+	  //extra: fades back in the orignal search tab if you keep it
+          $("#ordernavbtn").click(function(){
+		$(".flits-order-row").fadeIn();
+          });
+	  
+	  //extra: rehides results of search tab when you click back from original order lookup
+	  $("#searchnavbtn").click(function(){
+		$(".flits-order-row").hide();  
+		var valueInput = $("#searchOrder").val();  
+		var valueSearch = "#\\#"+valueInput ;
+		$(valueSearch).fadeIn();
+	  });     	  
+     </script>
+		  
+    {% comment %}
+    //code will toggle this section
+    {% endcomment %}
+
+    <div id="{{ order.name }}" class="flits-order-row" style="display:none"></div>
+    
+    {% comment %}
+    //add display none to first div and order.name as id
+    {% endcomment %}
